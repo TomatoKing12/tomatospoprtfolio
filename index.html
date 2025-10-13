@@ -460,8 +460,8 @@
         }
 
         .work-item {
-            width: 350px;
-            height: 220px;
+            width: 960px;
+            height: 540px;
             background: linear-gradient(135deg, rgba(255, 71, 87, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -470,6 +470,13 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
+        }
+
+        .editing {
+            .work-item {
+                width: 540px;
+                height: 960px;
+            }
         }
 
         .work-item::before {
@@ -785,7 +792,7 @@
 
     .work-item {
         width: 100%;
-        max-width: 350px;
+        max-width: 450px;
         height: 200px;
     }
 
@@ -956,13 +963,13 @@
                     <h3>3D Animation</h3>
                     <div class="works-grid">
                         <div class="work-item  scroll-fade-in">
-                            <video src="src/animation/animation1.mp4" width="100%" autoplay muted loop></video>
+                            <video src="src/animation/animation1.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                         <div class="work-item  scroll-fade-in">
-                            <video src="src/animation/animation2.mp4" width="100%" autoplay muted loop></video>
+                            <video src="src/animation/animation2.mp4" width="100%" autoplay muted loop controls></video>
                         </div> 
                         <div class="work-item  scroll-fade-in">
-                            <video src="src/animation/animation3.mp4" width="100%" autoplay muted loop></video>
+                            <video src="src/animation/animation3.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                     </div>
                 </div>
@@ -970,27 +977,27 @@
                     <h3>Motion Graphics</h3>
                     <div class="works-grid">
                         <div class="work-item  scroll-fade-in">
-                            <video src="src/motion/motion1.mp4" width="100%" autoplay muted loop></video>
+                            <video src="src/motion/motion1.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                         <div class="work-item  scroll-fade-in">
-                            <video src="src/motion/motion2.mp4" width="100%" autoplay muted loop></video>
+                            <video src="src/motion/motion2.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                         <div class="work-item  scroll-fade-in">
-                            <video src="src/motion/motion3.mp4" width="100%" autoplay muted loop></video>
+                            <video src="src/motion/motion3.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                     </div>
                 </div>
                 <div class="category">
                     <h3>Editing</h3>
-                    <div class="works-grid  scroll-fade-in">
+                    <div class="works-grid  scroll-fade-in editing">
                         <div class="work-item">
-                            Not today sorry! :/
+                            <video src="src/editing/United Network.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                         <div class="work-item  scroll-fade-in">
-                            Not today sorry! :/
+                            <video src="src/editing/Comp 1_3.mp4" width="100%" autoplay muted loop controls></video>
                         </div> 
                         <div class="work-item  scroll-fade-in">
-                            Not today sorry! :/
+                            <video src="src/editing/Voice1_3.mp4" width="100%" autoplay muted loop controls></video>
                         </div>
                     </div>
                 </div>
