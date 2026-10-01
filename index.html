@@ -617,7 +617,6 @@ a{ color:inherit; }
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-bottom:36px;
 }
 
 .filter-btn{
@@ -643,12 +642,12 @@ a{ color:inherit; }
 
 .works-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
-  gap:22px;
+  grid-template-columns:repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap:24px;
 }
 
 .works-grid.is-landscape{
-  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(min(100%, 560px), 1fr));
 }
 
 .clip{
@@ -851,6 +850,95 @@ a{ color:inherit; }
   .btn{ justify-content:center; width:100%; }
 }
 
+/* ---------------------------------------------------------
+   WORK-FIRST LAYOUT
+   --------------------------------------------------------- */
+
+.hero{ min-height:auto; padding-bottom:20px; }
+.hero-visual{ max-width:440px; justify-self:end; width:100%; }
+@media (max-width:940px){ .hero-visual{ justify-self:center; } }
+.works-section{ padding-top:60px; }
+
+.container-wide{ max-width:1680px; }
+@media (min-width:2400px){ .container-wide{ max-width:2000px; } }
+
+.works-head{ margin-bottom:36px; }
+.works-head h1{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(2.2rem, 4.6vw, 4rem);
+  line-height:1.06;
+  letter-spacing:-0.02em;
+  max-width:18ch;
+}
+.works-head .works-bar{ margin-top:28px; }
+.works-bar{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.filter-btn{ font-size:0.95rem; padding:12px 24px; }
+
+.clip{ border-radius:var(--radius-lg); }
+.clip-overlay{ opacity:1; background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 35%); }
+.clip-label{ font-size:0.95rem; }
+.clip:focus-visible{ outline-offset:4px; }
+
+.about{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  padding:28px 32px;
+  margin-bottom:20px;
+  border-radius:var(--radius-md);
+}
+.about img{
+  width:96px; height:96px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center top;
+  flex-shrink:0;
+  border:1px solid var(--glass-border-hi);
+}
+.about p{ color:var(--ink-dim); font-weight:300; font-size:1.05rem; max-width:60ch; }
+@media (max-width:640px){ .about{ flex-direction:column; text-align:center; } }
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:4vh 4vw;
+  background:rgba(4,4,8,0.92);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.lightbox.open{ display:flex; }
+.lb-inner{ display:flex; flex-direction:column; align-items:center; gap:14px; max-width:100%; max-height:100%; }
+.lb-inner video{
+  max-width:92vw;
+  max-height:80vh;
+  border-radius:var(--radius-md);
+  background:#000;
+  border:1px solid var(--glass-border-hi);
+}
+.lb-label{ color:var(--ink-dim); font-size:0.95rem; font-weight:500; }
+.lb-close{
+  position:absolute;
+  top:20px; right:20px;
+  width:44px; height:44px;
+  border-radius:50%;
+  border:1px solid var(--glass-border-hi);
+  background:var(--glass-bg-hi);
+  color:var(--ink);
+  font-size:1.1rem;
+  cursor:pointer;
+}
+
 </style>
 </head>
 <body>
@@ -861,16 +949,16 @@ a{ color:inherit; }
 <div class="nav-wrap">
   <div style="width:100%; max-width:960px; display:flex; flex-direction:column; align-items:center;">
     <nav class="nav glass">
-      <div class="brand">
+      <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer">
         <div class="brand-mark">FX</div>
         ItztomatoFX
       </div>
 
       <div class="nav-links" id="navLinks">
         <button data-target="home" class="active">Home</button>
+        <button data-target="works">Work</button>
         <button data-target="services">Services</button>
         <button data-target="experience">Experience</button>
-        <button data-target="works">Work</button>
         <button data-target="contact">Contact</button>
       </div>
 
@@ -880,10 +968,10 @@ a{ color:inherit; }
 
     <div class="nav-mobile glass" id="navMobile">
       <button data-target="home" class="active">Home</button>
-      <button data-target="services">Services</button>
-      <button data-target="experience">Experience</button>
-      <button data-target="works">Work</button>
-      <button data-target="contact">Contact</button>
+        <button data-target="works">Work</button>
+        <button data-target="services">Services</button>
+        <button data-target="experience">Experience</button>
+        <button data-target="contact">Contact</button>
     </div>
   </div>
 </div>
@@ -899,8 +987,8 @@ a{ color:inherit; }
         from Mine-Imator sequences to short-form cuts.
       </p>
       <div class="hero-actions">
-        <button class="btn btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Services &amp; Rates</button>
-        <button class="btn btn-glass glass" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">See My Work</button>
+        <button class="btn btn-primary" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">See My Work</button>
+        <button class="btn btn-glass glass" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services &amp; Rates</button>
       </div>
     </div>
 
@@ -908,6 +996,83 @@ a{ color:inherit; }
       <div class="glow"></div>
       <div class="frame">
         <img src="src/profile/profile.png" alt="ItztomatoFX profile photo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works" class="section works-section">
+  <div class="container container-wide">
+    <div class="works-head">
+      <h2 class="section-title">Recent work</h2>
+      <p class="section-sub">Click any clip to watch it full size with sound.</p>
+      <div class="works-bar">
+        <div class="filters">
+      <button class="filter-btn active" data-filter="editing">Editing</button>
+      <button class="filter-btn" data-filter="motion">Motion Graphics</button>
+      <button class="filter-btn" data-filter="animation">3D Animation</button>
+    </div>
+      </div>
+    </div>
+
+    <div class="works-grid" id="worksGrid">
+      <div class="clip reveal" data-cat="editing">
+        <video src="src/editing/editing1.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Editing</div>
+        <div class="clip-overlay"><span class="clip-label">Short-form edit</span></div>
+      </div>
+      <div class="clip reveal" data-cat="editing">
+        <video src="src/editing/editing2.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Editing</div>
+        <div class="clip-overlay"><span class="clip-label">Christmas special</span></div>
+      </div>
+      <div class="clip reveal" data-cat="editing">
+        <video src="src/editing/editing3.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Editing</div>
+        <div class="clip-overlay"><span class="clip-label">Editing clip 3</span></div>
+      </div>
+      <div class="clip reveal" data-cat="editing">
+        <video src="src/editing/editing4.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Editing</div>
+        <div class="clip-overlay"><span class="clip-label">Editing clip 4</span></div>
+      </div>
+
+      <div class="clip reveal" data-cat="motion">
+        <video src="src/motion/motion1.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Motion Graphics</div>
+        <div class="clip-overlay"><span class="clip-label">Motion clip 1</span></div>
+      </div>
+      <div class="clip reveal" data-cat="motion">
+        <video src="src/motion/motion2.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Motion Graphics</div>
+        <div class="clip-overlay"><span class="clip-label">Motion clip 2</span></div>
+      </div>
+      <div class="clip reveal" data-cat="motion">
+        <video src="src/motion/motion3.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Motion Graphics</div>
+        <div class="clip-overlay"><span class="clip-label">Motion clip 3</span></div>
+      </div>
+      <div class="clip reveal" data-cat="motion">
+        <video src="src/motion/motion4.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">Motion Graphics</div>
+        <div class="clip-overlay"><span class="clip-label">Motion clip 4</span></div>
+      </div>
+
+      <div class="clip reveal" data-cat="animation">
+        <video src="src/animation/animation1.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">3D Animation</div>
+        <div class="clip-overlay"><span class="clip-label">Animation clip 1</span></div>
+      </div>
+      <div class="clip reveal" data-cat="animation">
+        <video src="src/animation/animation2.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">3D Animation</div>
+        <div class="clip-overlay"><span class="clip-label">Animation clip 2</span></div>
+      </div>
+      <div class="clip reveal" data-cat="animation">
+        <video src="src/animation/animation3.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="clip-cat">3D Animation</div>
+        <div class="clip-overlay"><span class="clip-label">Animation clip 3</span></div>
       </div>
     </div>
   </div>
@@ -925,29 +1090,29 @@ a{ color:inherit; }
     <div class="services-grid">
       <div class="service-card glass reveal">
         <div class="service-top">
-          <h3>Motion Graphics</h3>
-          <span class="price-pill">$30 / 10s</span>
+          <h3>3D Animation</h3>
+          <span class="price-pill">$15–$30 / 10s</span>
         </div>
         <p>After Effects — rendered animation sequences.</p>
       </div>
       <div class="service-card glass reveal">
         <div class="service-top">
           <h3>3D Animation</h3>
-          <span class="price-pill">$50 / 10s</span>
+          <span class="price-pill">$20 / 5–10s</span>
         </div>
-        <p>Blender — character &amp; scene animation.</p>
+        <p>Mine-Imator — character &amp; scene animation.</p>
       </div>
       <div class="service-card glass reveal">
         <div class="service-top">
           <h3>Video Editing</h3>
-          <span class="price-pill">$5–$10 / 1 min</span>
+          <span class="price-pill">$10 / 1 min</span>
         </div>
         <p>After Effects — edited footage with motion elements.</p>
       </div>
       <div class="service-card glass reveal">
         <div class="service-top">
           <h3>Video Editing</h3>
-          <span class="price-pill">$10-$20 / short</span>
+          <span class="price-pill">$10 / short</span>
         </div>
         <p>Premiere Pro — short-form cuts.</p>
       </div>
@@ -999,83 +1164,6 @@ a{ color:inherit; }
   </div>
 </section>
 
-<!-- WORKS -->
-<section id="works" class="section">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow"><span class="dot"></span> Portfolio</div>
-      <h2 class="section-title">Recent work</h2>
-      <p class="section-sub">A look at recent edits and animation work.</p>
-    </div>
-
-    <div class="filters">
-      <button class="filter-btn active" data-filter="editing">Editing</button>
-      <button class="filter-btn" data-filter="animation">3D Animation</button>
-      <button class="filter-btn" data-filter="motion">Motion Graphics</button>
-    </div>
-
-    <div class="works-grid" id="worksGrid">
-      <div class="clip reveal" data-cat="editing">
-        <video src="src/editing/editing1.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Editing</div>
-
-      </div>
-      <div class="clip reveal" data-cat="editing">
-        <video src="src/editing/editing2.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Editing</div>
-
-      </div>
-      <div class="clip reveal" data-cat="editing">
-        <video src="src/editing/editing3.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Editing</div>
-
-      </div>
-      <div class="clip reveal" data-cat="editing">
-        <video src="src/editing/editing4.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Editing</div>
-
-      </div>
-
-      <div class="clip reveal" data-cat="animation">
-        <video src="src/animation/animation1.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">3D Animation</div>
-
-      </div>
-      <div class="clip reveal" data-cat="animation">
-        <video src="src/animation/animation2.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">3D Animation</div>
-
-      </div>
-      <div class="clip reveal" data-cat="animation">
-        <video src="src/animation/animation3.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">3D Animation</div>
-
-      </div>
-
-      <div class="clip reveal" data-cat="motion">
-        <video src="src/motion/motion1.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Motion Graphics</div>
-
-      </div>
-      <div class="clip reveal" data-cat="motion">
-        <video src="src/motion/motion2.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Motion Graphics</div>
-
-      </div>
-      <div class="clip reveal" data-cat="motion">
-        <video src="src/motion/motion3.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Motion Graphics</div>
-
-      </div>
-      <div class="clip reveal" data-cat="motion">
-        <video src="src/motion/motion4.mp4" autoplay muted loop playsinline></video>
-        <div class="clip-cat">Motion Graphics</div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CONNECT -->
 <section id="contact" class="section connect">
   <div class="container">
@@ -1113,6 +1201,14 @@ a{ color:inherit; }
 <div class="toast glass" id="toast">
   <div class="toast-text" id="toastText"></div>
   <div class="status">✓ Copied</div>
+</div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close video">✕</button>
+  <div class="lb-inner">
+    <video id="lbVideo" controls loop playsinline></video>
+    <div class="lb-label" id="lbLabel"></div>
+  </div>
 </div>
 
 <script>
@@ -1172,6 +1268,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyFilter(document.querySelector('.filter-btn.active').dataset.filter);
 
+  /* ---- Play clips only while on screen ---- */
+  const playObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const v = entry.target;
+      if (entry.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.clip video').forEach(v => playObserver.observe(v));
+
+  /* ---- Lightbox: click a clip to watch it big, with sound ---- */
+  const lightbox = document.getElementById('lightbox');
+  const lbVideo = document.getElementById('lbVideo');
+  const lbLabel = document.getElementById('lbLabel');
+  let lastClip = null;
+
+  function openLightbox(clip) {
+    lastClip = clip;
+    lbVideo.src = clip.querySelector('video').getAttribute('src');
+    lbLabel.textContent = clip.querySelector('.clip-label').textContent;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lbVideo.play().catch(() => {});
+  }
+  function closeLightbox() {
+    lbVideo.pause();
+    lbVideo.removeAttribute('src');
+    lbVideo.load();
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastClip) lastClip.focus();
+  }
+
+  document.querySelectorAll('.clip').forEach(clip => {
+    clip.tabIndex = 0;
+    clip.setAttribute('role', 'button');
+    clip.addEventListener('click', () => openLightbox(clip));
+    clip.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(clip); }
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
+
   /* ---- Scroll reveal ---- */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -1228,7 +1370,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
-
 </script>
 </body>
 </html>
